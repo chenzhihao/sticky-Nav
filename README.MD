@@ -83,7 +83,9 @@ var options = {
   activeClass: "active", // the class you want to attach
   attachActiveClassTo: "li", // the element you want to attach active class "li"/"a"
   animationDuration: 500, // the animation duration for smooth scroll
-  easing: "swing" // the animation easing for smooth scroll
+  easing: "swing", // the animation easing for smooth scroll
+  disableOnMobile: true, // if disable sticky nav on mobile
+  mobileWidth: 480 // default break point for mobile width
 };
 
 $('.nav').stickyNavbar(options);
@@ -94,4 +96,4 @@ $('.nav').stickyNavbar(options);
 ##Contact
 Copyright (C) 2014 Zhihao Chen<br>
 [@Linkedin](http://www.linkedin.com/pub/zhihao-chen/54/11a/438)<br>
-[@Gmail](cabtravis@gmail.com)<br>
+<cabtravis@gmail.com><br>
