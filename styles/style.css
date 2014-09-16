@@ -90,7 +90,7 @@
    	width: 100%;
    	height: 440px;
    	background-color: green;
-   	background-image: url('/images/header.jpg');
+   	background-image: url('/sticky-Nav/images/header.jpg');
    	background-size: cover;
    	background-position: bottom center;
    	z-index: 999;
