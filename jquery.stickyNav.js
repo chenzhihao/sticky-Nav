@@ -6,48 +6,53 @@
   $.fn.stickyNavbar = function (prop) {
 
     var options = $.extend({
-      header: $('.header'),
-      stickyPosition: $('.header').outerHeight(true),
+      header: '.header',
       banner: undefined,
-      navBar: $('.nav'),
+      navBar: '.nav',
       activeClass: "active",
       attachActiveClassTo: "li",
       animationDuration: 500,
-      easing: "swing"
+      easing: "swing",
+      disableOnMobile: false,
+      mobileWidth: 480
     }, prop);
 
-    var navBarHeight = options.navBar.outerHeight(true);
+    var header = options.header ? $(options.header) : undefined
+      , banner = options.banner ? $(options.banner) : undefined
+      , navBar = $(options.navBar);
 
-    var heroHeight = options.banner ? options.banner.outerHeight(true) : 0;
+    var stickyPosition = header ? header.outerHeight(true) : 0
+      , heroHeight = banner ? banner.outerHeight(true) : 0
+      , navBarHeight = navBar.outerHeight(true);
 
     // collect all the sections for jumping
     var sections = new jQuery();
-    options.navBar.find('a').map(function () {
+    navBar.find('li a').map(function () {
       var id = $(this).attr('href');
       sections = sections.add($(id));
     });
 
     // because we have header/banner so there is offset for sections
-    var sectionsOffset = options.stickyPosition + navBarHeight + 1;
+    var sectionsOffset = stickyPosition + navBarHeight + 1;
 
     // the active menu in navigator
     var activeOne;
 
 
     function initSecondaryNav() {
-      if (options.banner) {
-        options.navBar.before('<div class="nav-placeholder"></div>');
+      if (banner) {
+        navBar.before('<div class="nav-placeholder"></div>');
         $('.nav-placeholder').css('padding-bottom', navBarHeight + 'px');
       }
       else {
-        options.navBar.before('<div class="banner"></div>');
+        navBar.before('<div class="banner"></div>');
         $('.banner').css('padding-bottom', navBarHeight + 'px');
         $('.banner').css('height', '0px');
         $('.banner').css('z-index', '-9999');
       }
 
 
-      options.navBar.css('position', 'fixed').css('margin-top', -navBarHeight + 'px');
+      navBar.css('position', 'fixed').css('margin-top', -navBarHeight + 'px');
       scrollCallback();
     }
 
@@ -63,9 +68,9 @@
             activeOne.removeClass(options.activeClass);
           }
           if (options.attachActiveClassTo === "a") {
-            activeOne = options.navBar.find('li a[href~="#' + this.id + '"]');
+            activeOne = navBar.find('li a[href~="#' + this.id + '"]');
           } else {
-            activeOne = options.navBar.find('li a[href~="#' + this.id + '"]').parents('li');
+            activeOne = navBar.find('li a[href~="#' + this.id + '"]').parents('li');
           }
           activeOne.addClass(options.activeClass);
         }
@@ -75,8 +80,8 @@
     function positionNavBar() {
       if ($(window).scrollTop() >= 0) {
         $(window).scrollTop() < heroHeight
-          ? options.navBar.css('margin-top', -navBarHeight - $(window).scrollTop() + 'px')
-          : options.navBar.css('margin-top', -navBarHeight - heroHeight + 'px');
+          ? navBar.css('margin-top', -navBarHeight - $(window).scrollTop() + 'px')
+          : navBar.css('margin-top', -navBarHeight - heroHeight + 'px');
       }
     }
 
@@ -91,7 +96,7 @@
         target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
         if (target.length) {
           $("html, body").stop().animate({
-            scrollTop: target.offset().top - options.stickyPosition - navBarHeight
+            scrollTop: target.offset().top - stickyPosition - navBarHeight
           }, {
             duration: options.animationDuration,
             easing: options.easing
@@ -100,10 +105,13 @@
       }
     }
 
+    if (options.disableOnMobile && $(window).width() <= options.mobileWidth) {
+      return;
+    }
+
     initSecondaryNav();
     $(window).on('scroll', scrollCallback);
-    $('a[href*=#]:not([href=#])').on("click", smoothScroll);
-
+    $(options.navBar + ' a[href*=#]:not([href=#])').on("click", smoothScroll);
   }
 })
 (jQuery, window, document);
