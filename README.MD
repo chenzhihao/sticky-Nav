@@ -92,6 +92,7 @@ $('.nav').stickyNavbar(options);
 ```
 
 ##5. Demo
+<http://chenzhihao.github.io/sticky-Nav/>
 
 ##Contact
 Copyright (C) 2014 Zhihao Chen<br>
