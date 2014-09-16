@@ -9,10 +9,10 @@
       header: '.header',
       banner: undefined,
       navBar: '.nav',
-      activeClass: "active",
-      attachActiveClassTo: "li",
+      activeClass: 'active',
+      attachActiveClassTo: 'li',
       animationDuration: 500,
-      easing: "swing",
+      easing: 'swing',
       disableOnMobile: false,
       mobileWidth: 480
     }, prop);
@@ -67,7 +67,7 @@
           if (activeOne) {
             activeOne.removeClass(options.activeClass);
           }
-          if (options.attachActiveClassTo === "a") {
+          if (options.attachActiveClassTo === 'a') {
             activeOne = navBar.find('li a[href~="#' + this.id + '"]');
           } else {
             activeOne = navBar.find('li a[href~="#' + this.id + '"]').parents('li');
@@ -96,7 +96,7 @@
         var target = $(this.hash);
         target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
         if (target.length) {
-          $("html, body").stop().animate({
+          $('html, body').stop().animate({
             scrollTop: target.offset().top - stickyPosition - navBarHeight
           }, {
             duration: options.animationDuration,
@@ -112,7 +112,7 @@
 
     initSecondaryNav();
     $(window).on('scroll', scrollCallback);
-    $(options.navBar + ' a[href*=#]:not([href=#])').on("click", smoothScroll);
+    $(options.navBar + ' a[href*=#]:not([href=#])').on('click', smoothScroll);
   }
 })
 (jQuery, window, document);
