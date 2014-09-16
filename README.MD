@@ -4,6 +4,11 @@ stickyNavbar.js: A jQuery plugin make the navbar sticky, smart anchor link highl
 ##1. Setup
 Include jQuery library and stickyNav.js itself:
 
+install by bower:
+```js
+bower install sticky-nav
+```
+
 ```html
 <!-- all these references goes before the closing body tag-->
 <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
