@@ -6,7 +6,7 @@ Include jQuery library and stickyNav.js itself:
 
 ```html
 <!-- all these references goes before the closing body tag-->
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="/script/stickyNav.js"></script>
 ```
 
@@ -49,7 +49,7 @@ Body markup, not require any addtional class name:
 <div id="make">
 		<!-- Your content goes here -->
 </div>
-<div id="lie">
+<div id="life">
 		<!-- Your content goes here -->
 </div>
 <div id="easier">
@@ -64,7 +64,7 @@ ul.active a {
   color: #fff !important;
 }
 ```
-*Note: You can attch `active` class to li in navbar or the a in navbar directly, check the `options` object below*
+*Note: You can attch `active` class to li in navbar or the a in navbar directly, check the `options` object usage below.*
 
 ##4. jQuery:
 Call stickyNavbar function on the navigation wrapper (`.header`), nav tag or ul tag either without options object:
@@ -74,9 +74,18 @@ $('.nav').stickyNavbar();
 ```
 
 or with the options object:
-var options = {
 
-}
+```javascript
+var options = {
+  header: '.header', //the header selector
+  banner: undefined, //the banner selector
+  navBar: '.nav', //the navBar selector
+  activeClass: "active", // the class you want to attach
+  attachActiveClassTo: "li", // the element you want to attach active class "li"/"a"
+  animationDuration: 500, // the animation duration for smooth scroll
+  easing: "swing" // the animation easing for smooth scroll
+};
+
 $('.nav').stickyNavbar(options);
 ```
 
