@@ -83,8 +83,6 @@ or with the options object:
 ```javascript
 var options = {
   header: '.header', //the header selector
-  banner: undefined, //the banner selector
-  navBar: '.nav', //the navBar selector
   activeClass: "active", // the class you want to attach
   attachActiveClassTo: "li", // the element you want to attach active class "li"/"a"
   animationDuration: 500, // the animation duration for smooth scroll
