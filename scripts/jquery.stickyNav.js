@@ -7,23 +7,30 @@
 
     var options = $.extend({
       header: '.header',
-      banner: undefined,
-      navBar: '.nav',
       activeClass: 'active',
       attachActiveClassTo: 'li',
       animationDuration: 500,
       easing: 'swing',
-      disableOnMobile: false,
+      disableOnMobile: true,
       mobileWidth: 480
     }, prop);
 
     var header = options.header ? $(options.header) : undefined
       , banner = options.banner ? $(options.banner) : undefined
-      , navBar = $(options.navBar);
+      , navBar = $(this);
 
+    if (navBar.length == 0) {
+      return;
+    }
+
+    if (options.disableOnMobile && $(window).width() <= options.mobileWidth) {
+      return;
+    }
+
+    
     var stickyPosition = header ? header.outerHeight(true) : 0
-      , heroHeight = banner ? banner.outerHeight(true) : 0
-      , navBarHeight = navBar.outerHeight(true);
+      , heroHeight = navBar.offset().top - stickyPosition,
+      navBarHeight = navBar.outerHeight(true);
 
     // collect all the sections for jumping
     var sections = new jQuery();
@@ -33,7 +40,7 @@
     });
 
     // because we have header/banner so there is offset for sections
-    var sectionsOffset = stickyPosition + navBarHeight + 1;
+    var sectionsOffset = stickyPosition + navBarHeight + 2;
 
     // the active menu in navigator
     var activeOne;
@@ -106,13 +113,10 @@
       }
     }
 
-    if (options.disableOnMobile && $(window).width() <= options.mobileWidth) {
-      return;
-    }
 
     initSecondaryNav();
     $(window).on('scroll', scrollCallback);
-    $(options.navBar + ' a[href*=#]:not([href=#])').on('click', smoothScroll);
+    $(this).find(' a[href*=#]:not([href=#])').on('click', smoothScroll);
   }
 })
 (jQuery, window, document);
