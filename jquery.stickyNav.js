@@ -63,24 +63,32 @@
     }
 
     function addActiveState(sections) {
-      sections.each(function () {
-        var top = $(this).offset().top
-          , bottom = $(this).outerHeight(true) + top;
 
-        var windowScrollHeight = $(window).scrollTop();
+      var windowScrollHeight = $(window).scrollTop();
+      sections.each(function (index) {
+          var top = $(this).offset().top
+            , bottom = $(this).outerHeight(true) + top;
 
-        if (windowScrollHeight > top - sectionsOffset && windowScrollHeight < bottom - sectionsOffset) {
-          if (activeOne) {
-            activeOne.removeClass(options.activeClass);
+          windowScrollHeight = $(window).scrollTop();
+
+          if (
+            (windowScrollHeight > top - sectionsOffset && windowScrollHeight < bottom - sectionsOffset)
+            || (index == 0 && windowScrollHeight < top - sectionsOffset)
+            || (index == sections.length - 1 && windowScrollHeight > bottom - sectionsOffset)
+            ) {
+
+            if (activeOne) {
+              activeOne.removeClass(options.activeClass);
+            }
+            activeOne = options.attachActiveClassTo === 'a' ?
+              navBar.find('li a[href~="#' + this.id + '"]')
+              : navBar.find('li a[href~="#' + this.id + '"]').parents('li');
+            activeOne.addClass(options.activeClass);
           }
-          if (options.attachActiveClassTo === 'a') {
-            activeOne = navBar.find('li a[href~="#' + this.id + '"]');
-          } else {
-            activeOne = navBar.find('li a[href~="#' + this.id + '"]').parents('li');
-          }
-          activeOne.addClass(options.activeClass);
+
         }
-      });
+      );
+
     }
 
     function positionNavBar() {
@@ -93,7 +101,10 @@
 
     function scrollCallback() {
       positionNavBar();
-      addActiveState(sections);
+      // put this into next tick
+      setTimeout(function () {
+        addActiveState(sections);
+      }, 1);
     }
 
     function smoothScroll(e) {
