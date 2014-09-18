@@ -46,17 +46,11 @@
 
 
     function initSecondaryNav() {
-      if (banner) {
         navBar.before('<div class="nav-placeholder"></div>');
         $('.nav-placeholder').css('padding-bottom', navBarHeight + 'px');
-      }
-      else {
-        navBar.before('<div class="banner"></div>');
-        $('.banner').css('padding-bottom', navBarHeight + 'px');
-        $('.banner').css('height', '0px');
-        $('.banner').css('z-index', '-9999');
-      }
-
+        $('.nav-placeholder').css('padding-bottom', navBarHeight + 'px');
+        $('.nav-placeholder').css('height', '0px');
+        $('.nav-placeholder').css('z-index', '-9999');
 
       navBar.css('position', 'fixed').css('margin-top', -navBarHeight + 'px');
       scrollCallback();
