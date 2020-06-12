@@ -1,7 +1,7 @@
-#stickyNav.js
+# stickyNav.js
 stickyNavbar.js: A jQuery plugin make the navbar sticky, smart anchor link highlighting, smooth scrolling. Simple and powerful.
 
-##1. Setup
+## 1. Setup
 Include jQuery library and stickyNav.js itself:
 
 install by bower:
@@ -15,7 +15,7 @@ bower install sticky-nav
 <script src="/script/stickyNav.js"></script>
 ```
 
-##2. HTML Markup
+## 2. HTML Markup
 
 Navigation:
 ```html
@@ -62,7 +62,7 @@ Body markup, not require any addtional class name:
 </div>
 ```
 
-##3. CSS:
+## 3. CSS:
 Add `active` class into your `style.css` and style it as you like, eg.:
 ```css
 ul.active a {
@@ -71,7 +71,7 @@ ul.active a {
 ```
 *Note: You can attch `active` class to li in navbar or the a in navbar directly, check the `options` object usage below.*
 
-##4. jQuery:
+## 4. jQuery:
 Call stickyNavbar function on the navigation wrapper (`.header`), nav tag or ul tag either without options object:
 ```javascript
 
@@ -94,10 +94,5 @@ var options = {
 $('.nav').stickyNavbar(options);
 ```
 
-##5. Demo
+## 5. Demo
 <http://chenzhihao.github.io/sticky-Nav/>
-
-##Contact
-Copyright (C) 2014 Zhihao Chen<br>
-[@Linkedin](http://www.linkedin.com/pub/zhihao-chen/54/11a/438)<br>
-<cabtravis@gmail.com><br>
